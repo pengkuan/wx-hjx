@@ -1,0 +1,22 @@
+<view class="container">
+  <view class="form">
+    <view>
+      <text class='welcome'> 验证码已发送至</text>
+    </view>
+    <view class='phoneInfo'>
+      <text class='tel'>{{tel}}</text>
+      <text class='time' wx:if="{{time}}">{{time}}s</text>
+      <text class='time' bindtap='getPhoneCode' wx:else>重新获取</text>
+    </view>
+    <view class="input-wrapper">
+      <input class="mue-input input-tel" type="number" maxlength="6" bindinput="handlePhoneCode"
+              placeholder-style="color: #eee; font-size: 30rpx"
+              placeholder="请输入验证码"
+              value="{{ phoneCode }}"
+              focus="{{ !isValidPhoneCode }}"/>
+      <image class="clear-icon" bindtap="clearPhoneCode" wx-if="{{ phoneCode.length }}" src="../../image/ico_del.png"></image>
+    </view>
+    <text class='warnInfo'>{{warnInfo}}</text>
+    <button class="button mue-button mue-button-primary" disabled='{{!isValidPhoneCode}}' bindtap="login" >登录</button>
+    </view> 
+</view>

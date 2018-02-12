@@ -1,0 +1,16 @@
+<!--logs.wxml-->
+<view>
+  <image class="user-box" src='../../image/user_bg.png'></image>
+  <view class="userInfo">
+    <image bindtap="bindViewTap" class="userinfo-avatar" src="{{wxUserInfo.avatarUrl}}" background-size="cover"></image>
+    <view class="cont">
+      <view  class="ver1">微信名称：{{wxUserInfo.nickName}}</view>
+      <view  class="ver">真实姓名：{{userInfo.userName}}</view>
+      <view  class="ver">手机号码：{{userInfo.tel}}</view>
+    </view>
+    
+  </view>
+  <button class="button mue-button mue-button-primary" bindtap="unBind" >退出登录</button>
+  
+        
+</view>

@@ -1,0 +1,18 @@
+<view class="container">
+  <view class="form">
+    <view>
+      <image class='welcome-img' src='../../image/xl.png'></image>
+      <text class='welcome'> 欢迎来到换机侠</text>
+    </view>
+    <view class="input-wrapper">
+      <input class="mue-input input-tel" type="number" maxlength="13" bindinput="handleTel"
+              placeholder-style="color: #eee; font-size: 30rpx"
+              placeholder="请输入手机号码"
+              value="{{ tel }}"
+              focus="{{ !isValidTel }}"/>
+      <image class="clear-icon" bindtap="clearTel" wx-if="{{ tel.length }}" src="../../image/ico_del.png"></image>
+    </view>
+    <text class='warnInfo'>{{warnInfo}}</text>
+    <button class="button mue-button mue-button-primary" disabled='{{!isValidTel}}' bindtap="next" >下一步</button>
+    </view> 
+</view>

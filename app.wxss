@@ -1,0 +1,17 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+} 
+button[disabled][type="default"], wx-button[disabled]:not([type]){
+  background-color: #cccccc;
+  color:#fff;
+}
+.overflow{overflow: hidden}
+.fl{float: left}
+.fr{float: right}
+.inline-block{display: inline-block}

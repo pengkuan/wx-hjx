@@ -1,0 +1,189 @@
+/* pages/order/order.wxss */
+page{  
+  display: flex;  
+  flex-direction: column;  
+  height: 100%;  
+}  
+  
+/*搜索*/  
+.search{  
+  flex: auto;  
+  display: flex;  
+  flex-direction: column;  
+  background: #fff;  
+}  
+.search-bar{  
+  flex: none;  
+  display: flex;  
+  align-items: center;  
+  justify-content: space-between;  
+  padding: 20rpx;  
+  background: #f8f8f8;  
+}  
+.search-wrap{  
+  position: relative;  
+  flex: auto;  
+  display: flex;  
+  align-items: center;  
+  height: 72rpx;  
+  padding: 0 20rpx;  
+  background: #fff;  
+  border-radius: 36rpx;  
+}  
+.search-wrap .icon-search{  
+  margin-right: 10rpx;  
+}  
+.search-wrap .search-input{  
+  flex: auto;  
+  font-size: 28rpx;  
+}  
+.search-cancel{  
+  padding: 0 20rpx;  
+  font-size: 28rpx;  
+}  
+  
+/*搜索结果*/  
+.search-result{  
+  flex: auto;  
+  position: relative;  
+}  
+.search-result scroll-view{  
+  position: absolute;  
+  background: #f8f8f8;
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  top: 0;  
+}  
+.result-item{  
+  background: #fff;
+  position: relative;  
+  display: flex;  
+  width:654rpx;
+  padding:0 24rpx;
+  /* height:298rpx; */
+  margin:24rpx auto;
+  flex-direction: column;  
+  overflow: hidden;  
+  border-bottom: 2rpx solid #e5e5e5;  
+}  
+  
+.result-item .media{  
+  position: absolute;  
+  left: 16rpx;  
+  top: 16rpx;  
+  width: 80rpx;  
+  height: 80rpx;  
+  border-radius: 999rpx;  
+}  
+.result-item .title,  
+.result-item .subtitle{  
+  overflow: hidden;  
+  text-overflow: ellipsis;  
+  white-space: nowrap;  
+  line-height: 36rpx;  
+}  
+.result-item .title{  
+  margin-bottom: 4rpx;  
+  color: #000;  
+}  
+.result-item .subtitle{  
+  color: #808080;  
+  font-size: 24rpx;  
+}  
+.result-item:first-child .subtitle text{  
+  margin-right: 20rpx;  
+}  
+.result-item:not(:first-child) .subtitle text:not(:first-child):before{  
+  content: '/';  
+  margin: 0 8rpx;  
+}  
+.loading{  
+  padding: 10rpx;  
+  font-size: 22rpx;
+  color: #cccccc;
+  text-align: center;  
+}  
+.loading:before{  
+  display: inline-block;  
+  margin-right: 5rpx;  
+  vertical-align: middle;  
+  content: '';  
+  width: 40rpx;  
+  height: 40rpx;  
+  /* background: url(../../images/icon-loading.png) no-repeat;   */
+  background-size: contain;  
+  animation: rotate 1s linear infinite;  
+}  
+.loading.complete:before{  
+  display: none;  
+} 
+.result-item .order-num{
+	font-size: 26rpx;
+	color: #666666;
+} 
+.result-item .order-status{
+	font-size: 26rpx;
+	color: #f41717;
+} 
+.order-floot .order-time{
+	font-size: 20rpx;
+	line-height: 48rpx;
+	color: #cccccc;
+} 
+.order-floot .order-price{
+	font-size: 30rpx;
+	line-height: 48rpx;
+	color: #333333;
+} 
+.order-body{
+  padding:28rpx 0;
+  border-bottom:1px solid #f8f8f8;
+}
+.order-body .detail{
+  width: 350rpx;
+}
+.order-body .detail .phone-name{
+	font-size:30rpx;
+  line-height:40rpx;
+  color:#333333;
+  padding-bottom:15rpx;
+}
+.order-body .detail .other{
+	font-size: 22rpx;
+	line-height: 30rpx;
+	color: #999999;
+}
+
+.order-phone{
+  width:150rpx;
+  height:148rpx;
+  /* padding:0 46rpx 0 24rpx; */
+  vertical-align:top;
+}
+.order-isHighPrice{
+  width: 120rpx;
+  height:120rpx;
+  padding-top:8rpx;
+}
+.order-head{
+  padding: 18rpx 0;
+  border-bottom:1px solid #f8f8f8;
+}
+.order-floot{
+  padding: 12rpx 0;
+}
+/* 暂无数据  */
+.nodata-container{
+  text-align: center;
+  padding-top: 200rpx;
+}
+.nodata-container image{
+  width: 261rpx;
+	height: 217rpx;
+}
+.nodata-container .info{
+  font-size: 36rpx;
+  margin-top: 26rpx;
+  color:#666;
+}

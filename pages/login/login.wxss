@@ -1,0 +1,71 @@
+.container{
+  padding-top: 205rpx;
+}
+.welcome {
+	font-size: 60rpx;
+	color: #fc4747;
+}
+.form {
+  height: 100%;
+  width: 654rpx;
+  margin: 0 auto;
+}
+.form .input-wrapper {
+  display: flex;
+  padding-top: 60rpx;
+  padding-bottom: 10rpx;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #eee;
+}
+
+.form .mue-input {
+  height: 26rpx;
+  color: #292e3e;
+  font-size: 32rpx;
+  line-height: 26rpx;
+}
+
+.form .mue-button-primary {
+  height: 88rpx;
+  margin-top: 58rpx;
+  color: #fff;
+  font-size: 30rpx;
+  line-height: 88rpx;
+  border-radius: 8rpx;
+  background-color: #fc4747;
+}
+
+.form .mue-button-primary:after {
+  display: none;
+}
+ .warnInfo{
+	height: 25rpx;
+	font-size: 24rpx;
+	line-height: 48rpx;
+	color: rgba(252, 71, 71, 0.8);
+} 
+
+/*  */
+.tel{
+  float: left;
+	font-size: 28rpx;
+	color: rgba(51, 51, 51, 0.8);
+}
+.time{
+	font-size: 24rpx;
+	font-weight: normal;
+	color: #fc4b4b;
+  float: right;
+}
+.phoneInfo{
+  overflow: hidden;
+  line-height:50rpx;
+}
+.get-phonecode{
+  float: right;
+}
+.clear-icon{
+  width:32rpx;
+  height:32rpx;
+}

@@ -1,0 +1,55 @@
+
+.user-box{
+  display: block;
+  height:250rpx;
+  width: 737rpx;
+  margin: auto;
+}
+.userinfo-avatar {
+  width: 144rpx;
+  height: 144rpx;
+  border-radius: 50%;
+}
+.userInfo{
+  position: absolute;
+  top: 48rpx;
+  left: 57rpx;
+}
+.userInfo .logo{
+  width: 120rpx;
+  height: 120rpx;
+}
+.userInfo .cont{
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 37rpx;
+  padding-top: 12rpx;
+  color: #fff;
+  font-size: 28rpx;
+  line-height: 48rpx;
+}
+.userInfo .ver{
+  margin-top: 20rpx;
+  font-size: 26rpx;
+  line-height: 26rpx;
+}
+.userInfo .ver1{
+  font-size: 26rpx;
+  line-height: 26rpx;
+}
+.mue-button-primary {
+  display: block;
+  color:#fff;
+  margin:70rpx auto;
+  width: 702rpx;
+	height: 88rpx;
+	background-color: #fc4747;
+	border-radius: 8rpx;
+
+	font-size: 30rpx;
+	line-height: 88rpx;
+}
+
+.mue-button-primary:after {
+  display: none;
+}

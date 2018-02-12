@@ -1,0 +1,39 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/check/check",
+    "pages/login/login",
+    "pages/user/user",
+    "pages/order/order",
+    "pages/searchOrder/searchOrder"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "换机侠",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "selectedIconPath": "image/tabbar_home.png",
+        "iconPath": "image/tabbar_home_n.png"
+      },
+      {
+        "text": "订单",
+        "pagePath": "pages/order/order",
+        "selectedIconPath": "image/tabbar_order.png",
+        "iconPath" : "image/tabbar_order_n.png"
+      },
+      {
+        "text": "个人设置",
+        "pagePath": "pages/user/user",
+        "selectedIconPath": "image/tabbar_user.png",
+        "iconPath": "image/tabbar_user_n.png"
+      }
+    ]
+  },
+  "debug": true
+}
