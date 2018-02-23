@@ -1,13 +1,69 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<view class="container" wx:if="{{isBind}}">
+  <view class='search'>
+    <view class="search-wrap">  
+        <icon type="search" size="16" class="icon-search" />  
+        <input type="text" placeholder="请输入订单号/手机型号/物流单号/门店名称" class="search-input" placeholder-style="color: #eee; font-size: 24rpx" bindtap='goSearch' />  
+    </view>
+  </view>  
+  <view class="banner">
+    <swiper indicator-dots="{{indicatorDots}}" indicator-dots="true" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#666" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image"/>
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+
+  <!-- 入口  -->
+  <view class='home-index'>
+    <view class='bg-blue bg-common' bindtap='todayOrder'>
+      <image src='../../image/home_ico_jrdd.png'></image>
+      <view>今日订单</view>
+    </view>
+    <view class='bg-yellow bg-common' bindtap='showToast'>
+      <image src='../../image/home_ico_hzsgl.png'></image>
+      <view>合作商管理</view>
+    </view>
+    <view class='bg-red bg-common' bindtap='showToast'>
+      <image src='../../image/home_ico_mdgl.png'></image>
+      <view>门店管理</view>
+    </view>
+  </view>
+  <!-- 订单数据  -->
+  <view class='order-data'>
+    <view class="order-header">
+      <text class='order-title'>订单数据</text>
+      <image bindtap='showIntroduce' class='order-question' src='../../image/home_ico_wen.png'></image>
+    </view>
+    <view class="table">
+      <view class="tr t-header">
+        <view class="th border-r width-less">日期</view>
+        <view class="th">门店活跃</view>
+        <view class="th ">交易门店</view>
+        <view class="th border-r">检测总数</view>
+        <view class="th ">订单总数</view>
+      </view>
+      <block wx:for="{{listData}}" wx:key="{{code}}">
+        <view class="tr {{index==1?'t-header':''}}">
+          <view class="td border-r width-less">{{item.code}}</view>
+          <view class="td">{{item.text1}}</view>
+          <view class="td">{{item.text2}}</view>
+          <view class="td border-r">{{item.text3}}</view>
+          <view class="td">{{item.text4}}</view>
+        </view>
+      </block>
+    </view>
+
+  </view>
+  <!-- 模态框  -->
+  <view class="wxapp-modal" wx:if="{{showIntroduce}}">
+    <view class='body'>
+      <view class="content">
+        <text>  活跃门店：啊啊啊 \n 交易门店： hahahh \n 检测总数：检测的总数 \n 订单总数：订单的总数 </text>
+      </view>
+      <view class='yes' bindtap="closeIntroduce">知道了</view>
+    </view>
   </view>
 </view>

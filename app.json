@@ -5,7 +5,8 @@
     "pages/login/login",
     "pages/user/user",
     "pages/order/order",
-    "pages/searchOrder/searchOrder"
+    "pages/searchOrder/searchOrder",
+    "pages/test/test"
   ],
   "window":{
     "backgroundTextStyle":"light",

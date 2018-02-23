@@ -1,4 +1,4 @@
-<view class="search">  
+<view class="search" >  
   <view class="search-bar">  
     <view class="search-wrap">  
         <icon type="search" size="16" class="icon-search" />  
@@ -6,41 +6,49 @@
         <input type="text" placeholder="请输入订单号/手机型号/物流单号/门店名称" class="search-input" placeholder-style="color: #eee; font-size: 24rpx" bindtap='goSearch' />  
     </view>  
   </view>  
-  <view class="search-result">  
-    <view wx:if="{{searchSongList.length > 0}}">
-      <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower">  
-        <view class="result-item" wx:for="{{searchSongList}}" >  
-          <view class="order-head overflow">
-            <text class='order-num fl'>订单号：{{item.orderId}}</text>
-            <text class='order-status fr'>{{item.orderStatusName}}</text>
-          </view>
-          <view class="order-body overflow">
-            <view class='order-info fl'>
-              <image class='order-phone inline-block' src='{{phoneimgCDNUrl+item.productPic}}'></image>
-              <view class='detail inline-block'>
-                <view class='phone-name'>{{item.productModel}}</view>
-                <view class='other'>IMEI：{{item.appInputIMEI}}</view>
-                <view class='other'>S1：{{item.s1Name}}</view>
-                <view class='other'>S门店：{{item.o1Name}}</view>
+  <view class="search-result" wx:if="{{!loading}}">  
+    <block wx:if="{{searchOrderList.length > 0}}">
+      <view >
+        <!-- 设置scroll-top解决初始化时下拉不触发事件问题  -->
+        <scroll-view  scroll-top="1" scroll-y="true" bindscrolltoupper="searchScrollToupper" bindscrolltolower="searchScrollLower"> 
+          <view class="refresh" hidden="{{!refresh}}">正在刷新...</view>
+          <view class="result-item" wx:for="{{searchOrderList}}" >  
+            <view class="order-head overflow">
+              <text class='order-num fl'>订单号：{{item.orderId}}</text>
+              <text class='order-status fr'>{{item.orderStatusName}}</text>
+              <image wx:if="{{item.phoneType == '2'}}" class="recyle-type-icon" src='../../image/order_hb.png'></image>
+              <image wx:if="{{item.phoneType == '4'}}" class="recyle-type-icon" src='../../image/order_gy.png'></image>
+            </view>
+            <view class="order-body overflow">
+              <view class='order-info fl'>
+                <image class='order-phone inline-block' src='{{phoneimgCDNUrl+item.productPic}}'></image>
+                <view class='detail inline-block'>
+                  <view class='phone-name'>{{item.productModel}}</view>
+                  <view class='other'>IMEI：{{item.appInputIMEI}}</view>
+                  <view class='other'>S1：{{item.s1Name}}</view>
+                  <view class='other'>S门店：{{item.o1Name}}</view>
+                </view>
+              </view>
+              <view class='order-isHighPrice fr' wx:if="{{item.payPrice > highPricePhone}}">
+                <image class='order-isHighPrice' src='../../image/order_high_price.png'></image>
               </view>
             </view>
-            <view class='order-isHighPrice fr' wx:if="{{item.payPrice > highPricePhone}}">
-              <image class='order-isHighPrice' src='../../image/order_high_price.png'></image>
-            </view>
-          </view>
-          <view class="order-floot overflow">
-            <text class='order-time fl'>下单时间：{{item.orderTime}}</text>
-            <text class='order-price fr' wx:if="{{item.payPrice}}">￥{{item.payPrice/100}}</text>
+            <view class="order-floot overflow">
+              <text class='order-time fl'>下单时间：{{item.orderTime}}</text>
+              <text class='order-price fr' wx:if="{{item.payPrice}}">￥{{item.payPrice/100}}</text>
+            </view>  
           </view>  
-        </view>  
 
-        <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>  
-        <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</view>  
-      </scroll-view> 
-    </view>   
-    <view wx:else class='nodata-container'>
-      <image src="../../image/order_nodata.png"></image>
-      <view class='info'>暂无数据</view>
-    </view>
+          <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>  
+          <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</view>  
+        </scroll-view> 
+      </view>   
+    </block>
+    <block wx:else>
+      <view class='nodata-container'>
+        <image src="../../image/order_nodata.png"></image>
+        <view class='info'>暂无数据</view>
+      </view>
+    </block>
   </view>  
 </view> 

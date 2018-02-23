@@ -5,22 +5,39 @@ var util = require('../../util/utils1.js')
 var config = require('../../config/index.js')
 Page({
   data: {
-    searchSongList: [], //放置返回数据的数组  
-    isFromSearch: true,   // 用于判断searchSongList数组是不是空数组，默认true，空的数组  
+    searchOrderList: [], //放置返回数据的数组  
+    isFromSearch: true,   // 用于判断searchOrderList数组是不是空数组，默认true，空的数组  
     searchPageNum: '0',   // 设置加载的第几次，默认是第一次  
     callbackcount: 15,      //返回数据的个数  
+    refresh: false, //下拉刷新变量，默认false，隐藏
     searchLoading: false, //"上拉加载"的变量，默认false，隐藏  
     searchLoadingComplete: false , //“没有数据”的变量，默认false，隐藏  
     phoneimgCDNUrl:'',
-    highPricePhone: config.highPricePhone
+    highPricePhone: config.highPricePhone,
+    loading:true
   },
-  onLoad(){
-    this.keywordSearch()
+  onShow(){
+    //是否有搜索条件
+    if (false){
+
+    }else{
+      this.init()
+    }
+  },
+  onHide(){
+    //页面隐藏时 
+    this.setData({
+      'loading': true
+    })
+    //将搜索参数初始化
+
   },
   //搜索，访问网络  
   fetchSearchList: function () {
     let searchPageNum = this.data.searchPageNum,//把第几次加载次数作为参数  
-        callbackcount = this.data.callbackcount; //返回数据的个数  
+        callbackcount = this.data.callbackcount; //返回数据的个数 
+
+    //设置筛选值 ing..     
     let reqData = {
       "roleId": app.globalData.userInfo.userId, 
       "channelUserId": app.globalData.userInfo.channelUserId, 
@@ -33,13 +50,16 @@ Page({
     }
     api.orderList(reqData).then(res=>{
       if (res.ret != '0') {
-        this.setData({
-          'warnInfo': res.retinfo
+        wx.showToast({
+          title: res.retinfo,
+          icon:'none'
         })
         return
       }
+      //关闭下拉
+      wx.stopPullDownRefresh();
       let result = res.data
-      this.setData({
+      this.setData({ 
         phoneimgCDNUrl: result.phoneimgCDNUrl,
         statusInfo: result.statusInfo,
         statusInfoDp: result.statusInfoDp
@@ -47,7 +67,7 @@ Page({
       if (result.orderList.length != 0) {
         let searchList = [];
         //如果isFromSearch是true从data中取出数据，否则先从原来的数据继续添加  
-        this.data.isFromSearch ? searchList = result.orderList : searchList = this.data.searchSongList.concat(result.orderList)
+        this.data.isFromSearch ? searchList = result.orderList : searchList = this.data.searchOrderList.concat(result.orderList)
         searchList.forEach(item=>{
           let orderStatusName = '无'
           this.data.statusInfoDp.forEach(val=>{
@@ -55,12 +75,14 @@ Page({
           })
         })
         this.setData({
-          searchSongList: searchList, //获取数据数组  
+          searchOrderList: searchList, //获取数据数组  
+          loading: false, //在设置searchOrderList数据后再显示
           searchLoading: true   //把"上拉加载"的变量设为false，显示  
         });
         //没有数据了，把“没有数据”显示，把“上拉加载”隐藏  
       } else {
         this.setData({
+          loading: false, //在设置searchOrderList数据后再显示
           searchLoadingComplete: true, //把“没有数据”设为true，显示  
           searchLoading: false  //把"上拉加载"的变量设为false，隐藏  
         });
@@ -68,15 +90,35 @@ Page({
     })
   },
   //点击搜索按钮，触发事件  
-  keywordSearch: function (e) {
+  init: function (e) {
+    this.initData()
+    this.fetchSearchList();
+  },
+  initData:function(){
     this.setData({
+      loading: true,
       searchPageNum: '0',   //第一次加载，设置1  
-      searchSongList: [],  //放置返回数据的数组,设为空  
+      searchOrderList: [],  //放置返回数据的数组,设为空  
       isFromSearch: true,  //第一次加载，设置true  
       searchLoading: true,  //把"上拉加载"的变量设为true，显示  
       searchLoadingComplete: false //把“没有数据”设为false，隐藏  
     })
-    this.fetchSearchList();
+  },
+  //滚动顶部触发刷新  
+  searchScrollToupper: function () {
+    var self = this
+    this.setData({
+      refresh:true
+    })
+    setTimeout(()=>{
+      let date = new Date()
+      self.setData({
+        refresh:false,
+        loading:true
+      })
+      this.init()
+    },1000)
+    
   },
   //滚动到底部触发事件  
   searchScrollLower: function () {
@@ -91,4 +133,5 @@ Page({
   goSearch(){
     wx.navigateTo({ 'url': '/pages/searchOrder/searchOrder'})
   }
+
 })  

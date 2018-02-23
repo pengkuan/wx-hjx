@@ -5,7 +5,22 @@ import user from '../../model/user'
 import api from '../../api/index'
 Page({
   data: {
-    motto: '首页功能待开发',
+    isBind:false,//检查是否绑定，未绑定则去登录绑定
+    listData: [
+      { "code": "今天", "text1": "11", "text2": "21", "text3": "31", "text4": "41"},
+      { "code": "昨天", "text1": "11", "text2": "21", "text3": "31", "text4": "41" },
+      { "code": "本周", "text1": "11", "text2": "21", "text3": "31", "text4": "41555" }
+    ],
+    imgUrls: [
+      "../../image/home_banner1.png",
+      "../../image/home_banner1.png",
+      "../../image/home_banner1.png"
+    ],
+    showIntroduce:false,
+    indicatorDots: false,
+    autoplay: false,
+    interval: 5000,
+    duration: 1000
   },
   onLoad: function () {
     user.getWxCode().then((code) => {
@@ -32,6 +47,8 @@ Page({
             wx.redirectTo({'url': '/pages/check/check'})
             return
           }
+          //否则 代表已绑定 展示页面并设置信息
+          this.setData({ isBind : true })
           app.globalData.userInfo = {
             channelUserId: res.data.channel_user_id,
             tel: res.data.phone,
@@ -47,5 +64,34 @@ Page({
     })
 
   },
-  
+  goSearch() {
+    wx.navigateTo({ 'url': '/pages/searchOrder/searchOrder' })
+  },
+  todayOrder(){
+    wx.switchTab({
+      url: '/pages/order/order',
+    })
+  },
+  showToast(){
+    wx.showToast({
+      title: '功能开发中，敬请期待',
+      icon:'none'
+    })
+  },
+  showIntroduce(bool){
+    this.setData({
+      showIntroduce : true
+    })
+  },
+  closeIntroduce(){
+    this.setData({
+      showIntroduce: false
+    })
+  },
+  //下来刷新
+  onPullDownRefresh: function () {
+    console.log(6333)
+    //结束后关闭刷新
+     wx.stopPullDownRefresh();
+  },
 })

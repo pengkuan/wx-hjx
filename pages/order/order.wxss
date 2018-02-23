@@ -18,9 +18,11 @@ page{
   align-items: center;  
   justify-content: space-between;  
   padding: 20rpx;  
-  background: #f8f8f8;  
+  background: #fff;  
 }  
 .search-wrap{  
+  box-shadow: 0px 2px 20px 0px 
+		rgba(0, 0, 0, 0.1);
   position: relative;  
   flex: auto;  
   display: flex;  
@@ -186,4 +188,18 @@ page{
   font-size: 36rpx;
   margin-top: 26rpx;
   color:#666;
+}
+.refresh{
+  text-align: center;
+  font-size: 20rpx;
+  line-height: 40rpx;
+  color:#cccccc;
+  position:relative;
+  top:10rpx;
+}
+.recyle-type-icon{
+  height: 26rpx;
+  width:26rpx;
+  vertical-align: top;
+  margin-left: 10rpx;
 }
