@@ -1,10 +1,12 @@
 {
   "pages":[
+    
     "pages/index/index",
     "pages/check/check",
     "pages/login/login",
     "pages/user/user",
     "pages/order/order",
+    "pages/orderDetail/orderDetail",
     "pages/searchOrder/searchOrder",
     "pages/test/test"
   ],

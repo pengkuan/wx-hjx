@@ -4,102 +4,47 @@ import api from '../../api/index'
 var util = require('../../util/utils1.js')
 Page({
   data: {
-    searchKeyword: 'far away from home',  //需要搜索的字符  
-    searchSongList: [], //放置返回数据的数组  
-    isFromSearch: true,   // 用于判断searchSongList数组是不是空数组，默认true，空的数组  
-    searchPageNum: '0',   // 设置加载的第几次，默认是第一次  
-    callbackcount: 15,      //返回数据的个数  
-    searchLoading: false, //"上拉加载"的变量，默认false，隐藏  
-    searchLoadingComplete: false  //“没有数据”的变量，默认false，隐藏  
+    typeId:1,
+    searchkey:'',
+    typeList:[
+      { id: '1', name:'订单号'},
+      { id: '2', name: '手机型号' },
+      { id: '3', name: '物流单号' },
+      { id: '4', name: '门店名称' }
+    ],
+    searchHistory: ['iPhone 8', '123456', '深圳市南山区', 'iPhone 8', '123456', '深圳市南山区']
   },
   onLoad() {
-    // this.keywordSearch()
+    //获取搜索记录
   },
-  //输入框事件，每输入一个字符，就会触发一次  
-  bindKeywordInput: function (e) {
+  handleKey(e) {
     this.setData({
-      searchKeyword: e.detail.value
+      searchkey: e.detail.value
+    });
+    
+  },
+  typeTapHandler(event) {
+    let dataSet = event.currentTarget.dataset;
+    this.setData({
+      typeId: dataSet.id,
     })
   },
-  //搜索，访问网络  
-  fetchSearchList: function () {
-    let that = this;
-    let searchKeyword = that.data.searchKeyword,//输入框字符串作为参数  
-      searchPageNum = that.data.searchPageNum,//把第几次加载次数作为参数  
-      callbackcount = that.data.callbackcount; //返回数据的个数  
-    let reqData = {
-      "roleId": app.globalData.userInfo.userId,
-      "channelUserId": app.globalData.userInfo.channelUserId,
-      "orderStatus": "0",
-      "searchKey": "",
-      "startTime": "2018-01-02 12:00:00",
-      "endTime": "2018-02-02 12:00:00",
-      "pageIndex": searchPageNum + '',
-      "pageSize": "10"
-    }
-    api.orderList(reqData).then(res => {
-      if (data.data.song.curnum != 0) {
-        let searchList = [];
-        //如果isFromSearch是true从data中取出数据，否则先从原来的数据继续添加  
-        that.data.isFromSearch ? searchList = data.data.song.list : searchList = that.data.searchSongList.concat(data.data.song.list)
-        that.setData({
-          searchSongList: searchList, //获取数据数组  
-          zhida: data.data.zhida, //存放歌手属性的对象  
-          searchLoading: true   //把"上拉加载"的变量设为false，显示  
-        });
-        //没有数据了，把“没有数据”显示，把“上拉加载”隐藏  
-      } else {
-        that.setData({
-          searchLoadingComplete: true, //把“没有数据”设为true，显示  
-          searchLoading: false  //把"上拉加载"的变量设为false，隐藏  
-        });
+  getSearch(){
+    console.log(this.data.searchkey , this.data.typeId)
+  },
+  delSearchHistory(){
+    let self = this
+    wx.showModal({
+      title: '',
+      content: '确认删除最近搜索记录?',
+      success:function(res){
+        if (res.confirm){
+          self.setData({
+            searchHistory: []
+          })
+        }
       }
     })
-    //访问网络  
-    // util.getSearchMusic(searchKeyword, searchPageNum, callbackcount, function (data) {
-    //   console.log(data)
-    //   //判断是否有数据，有则取数据  
-    //   if (data.data.song.curnum != 0) {
-    //     let searchList = [];
-    //     //如果isFromSearch是true从data中取出数据，否则先从原来的数据继续添加  
-    //     that.data.isFromSearch ? searchList = data.data.song.list : searchList = that.data.searchSongList.concat(data.data.song.list)
-    //     that.setData({
-    //       searchSongList: searchList, //获取数据数组  
-    //       zhida: data.data.zhida, //存放歌手属性的对象  
-    //       searchLoading: true   //把"上拉加载"的变量设为false，显示  
-    //     });
-    //     //没有数据了，把“没有数据”显示，把“上拉加载”隐藏  
-    //   } else {
-    //     that.setData({
-    //       searchLoadingComplete: true, //把“没有数据”设为true，显示  
-    //       searchLoading: false  //把"上拉加载"的变量设为false，隐藏  
-    //     });
-    //   }
-    // })
-  },
-  //点击搜索按钮，触发事件  
-  keywordSearch: function (e) {
-    this.setData({
-      searchPageNum: '0',   //第一次加载，设置1  
-      searchSongList: [],  //放置返回数据的数组,设为空  
-      isFromSearch: true,  //第一次加载，设置true  
-      searchLoading: true,  //把"上拉加载"的变量设为true，显示  
-      searchLoadingComplete: false //把“没有数据”设为false，隐藏  
-    })
-    this.fetchSearchList();
-  },
-  //滚动到底部触发事件  
-  searchScrollLower: function () {
-    let that = this;
-    if (that.data.searchLoading && !that.data.searchLoadingComplete) {
-      that.setData({
-        searchPageNum: that.data.searchPageNum + 1,  //每次触发上拉事件，把searchPageNum+1  
-        isFromSearch: false  //触发到上拉事件，把isFromSearch设为为false  
-      });
-      that.fetchSearchList();
-    }
-  },
-  goSearch() {
-    wx.navigateTo({ 'url': '/pages/searchOrder/searchOrder' })
   }
+  
 })  

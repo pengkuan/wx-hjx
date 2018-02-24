@@ -1,0 +1,51 @@
+<view class="container">
+  <view class='content-box text-center color666'>
+    <view class='phoneName ft24'>iPhone X</view>
+    <view class='imei ft24'>IMEI：12345678912345</view>
+    <view class='price ft24'>回收报价：￥6666 (<text class='difference'>差异额：￥2222</text>) </view>
+    <view class='status' bindtap='chooseSezi'>已预付款<image src='../../image/odetail_more.png'></image> </view>
+    <view class='report ft24'> <image src='../../image/odetail_report.png'></image> 质检报告</view>
+  </view>
+  <view class='content-box'>
+    <view class='title'>商户信息</view>
+    <view class='detail'>
+      <view>S1姓名： 小白白</view>
+      <view>S1手机： 15117933646</view>
+      <view>O1名称： 华为售后海岸城店</view>
+      <view>O3名称： 华为售后</view>
+    </view>
+  </view>
+  <view class='content-box'>
+    <view class='title'>顾客信息</view>
+    <view class='detail'>
+      <view>顾客姓名： 奥沙利阳</view>
+      <view>顾客手机： 151****3646</view>
+      <view>身份证号： 220**********0039</view>
+    </view>
+  </view>
+  <view class='content-box'>
+    <view class='title'>订单信息</view>
+    <view class='order-detail'>
+      <view class="order-no"> <text>订单号码：123456</text> <button bindtap='copyOrderNo'>复制</button> </view>
+      <view>发货时间：2018-01-18 22:22:22</view>
+      <view>回收类型：门店回收</view>
+      <view>发货单号：123456789</view>
+      <view>下单时间：2018-01-18 23:23:23</view>
+    </view>
+  </view>
+<!-- 底部滑出订单跟踪Modal  -->
+  <view class='orderTrackBg' wx:if="{{showOrderTrack}}" bindtap='hideModal'></view>
+  <view class='orderTrack' wx:if="{{showOrderTrack}}" animation='{{animationData}}'>
+    <view class='trackTitle'>订单跟踪</view>
+    <scroll-view scroll-y style="height: 480rpx;">
+      <view class="track-item" wx:for="{{orderTrackList}}" wx:key="{{index}}">
+        <view class="{{index == orderTrackList.length - 1?'current':''}}">
+          <text class="{{index == orderTrackList.length - 1?'currentSpot':'spot'}}"></text>
+          {{item.name}}
+        </view>
+        <view>{{item.time}}</view>
+      </view>
+    </scroll-view>
+    <view class='hide-modal' bindtap='hideModal'>关闭</view>
+  </view>
+</view>

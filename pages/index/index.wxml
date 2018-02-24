@@ -1,11 +1,11 @@
 <!--index.wxml-->
 <view class="container" wx:if="{{isBind}}">
-  <view class='search'>
+   <view class='search'> 
     <view class="search-wrap">  
         <icon type="search" size="16" class="icon-search" />  
         <input type="text" placeholder="请输入订单号/手机型号/物流单号/门店名称" class="search-input" placeholder-style="color: #eee; font-size: 24rpx" bindtap='goSearch' />  
     </view>
-  </view>  
+   </view>   
   <view class="banner">
     <swiper indicator-dots="{{indicatorDots}}" indicator-dots="true" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#666" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
       <block wx:for="{{imgUrls}}" wx:key="{{index}}">

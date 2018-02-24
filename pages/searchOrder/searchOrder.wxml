@@ -1,3 +1,24 @@
 <view class="container">
-  
+  <view class='search-box'>
+    <view class='input-box'>
+      <icon type="search" size="16" class="icon-search" />
+      <input value="{{searchkey}}" bindinput="handleKey" class='search-input' placeholder-style="color: #eee; font-size: 24rpx" placeholder='请先选择搜索类型'></input>
+    </view>
+    <view class='search-btn' bindtap='getSearch'>搜索</view>
+  </view>
+  <view class='type'>
+    <view wx:for="{{typeList}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap='typeTapHandler' class="type-item {{item.id == typeId?'current':''}}">
+      {{item.name}} 
+    </view>
+  </view>
+  <view class='bottom-space'>
+    <view class='recently'>
+      <text class='title'>最近搜索</text>
+      <image src='../../image/search_delhistory.png' bindtap='delSearchHistory'></image>
+    </view>
+    <view class='history-box'>
+      <view class='search-history' wx:for="{{searchHistory}}" wx:key="{{index}}">{{item}}</view>
+    </view>
+  </view>
+
 </view>
