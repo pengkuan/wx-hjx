@@ -15,14 +15,14 @@
       <view>O3名称： 华为售后</view>
     </view>
   </view>
-  <view class='content-box'>
+  <!-- <view class='content-box'>
     <view class='title'>顾客信息</view>
     <view class='detail'>
       <view>顾客姓名： 奥沙利阳</view>
       <view>顾客手机： 151****3646</view>
       <view>身份证号： 220**********0039</view>
     </view>
-  </view>
+  </view> -->
   <view class='content-box'>
     <view class='title'>订单信息</view>
     <view class='order-detail'>
@@ -39,8 +39,8 @@
     <view class='trackTitle'>订单跟踪</view>
     <scroll-view scroll-y style="height: 480rpx;">
       <view class="track-item" wx:for="{{orderTrackList}}" wx:key="{{index}}">
-        <view class="{{index == orderTrackList.length - 1?'current':''}}">
-          <text class="{{index == orderTrackList.length - 1?'currentSpot':'spot'}}"></text>
+        <view class="{{index == 0?'current':''}}">
+          <text class="{{index == 0?'currentSpot':'spot'}}"></text>
           {{item.name}}
         </view>
         <view>{{item.time}}</view>

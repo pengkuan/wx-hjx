@@ -1,4 +1,4 @@
-<view class="search" >  
+<view class="search" wx:if="{{!showFilterTime}}">  
   <view class="search-bar">  
     <view class="search-wrap">  
         <icon type="search" size="16" class="icon-search" />  
@@ -6,11 +6,26 @@
         <input type="text" placeholder="请输入订单号/手机型号/物流单号/门店名称" class="search-input" placeholder-style="color: #eee; font-size: 24rpx" bindtap='goSearch' />  
     </view>  
   </view>  
+  <!-- 订单筛选  -->
+  <view class='order-filter'>
+    <picker bindchange="bindPickerChange" range-key="name" value="{{filter.statusIndex}}" range="{{statusList}}">
+      <view class="picker">
+        {{statusList[filter.statusIndex].name}}
+        <image src='../../image/ico_down.png'></image>
+      </view>
+    </picker>
+    <view class="picker" bindtap='filterTime'>
+         {{filter.startTime?filter.startTime+'至'+filter.endTime : '下单时间'}} 
+        <!-- {{filter.startTime?444:55}} -->
+        <image src='../../image/ico_down.png'></image>
+    </view>
+  </view>
+  <!-- 订单列表  -->
   <view class="search-result" wx:if="{{!loading}}">  
     <block wx:if="{{searchOrderList.length > 0}}">
       <view >
         <!-- 设置scroll-top解决初始化时下拉不触发事件问题  -->
-        <scroll-view  scroll-top="1" scroll-y="true" bindscrolltoupper="searchScrollToupper" bindscrolltolower="searchScrollLower"> 
+        <scroll-view style="height: 100%;" upper-threshold="0" scroll-top="1" scroll-y="true" bindscrolltoupper="searchScrollToupper" bindscrolltolower="searchScrollLower"> 
           <view class="refresh" hidden="{{!refresh}}">正在刷新...</view>
           <navigator wx:for="{{searchOrderList}}" wx:key="{{index}}" url = "../orderDetail/orderDetail?orderId={{item.orderId}}">
             <view class="result-item" >  
@@ -54,3 +69,23 @@
     </block>
   </view>  
 </view> 
+<view wx:else class="choose-time-box">
+  <view class='flex-j-between choose-time'>
+    <text>开始时间：</text>
+    <picker mode="date" value="{{chooseTime.startTime}}"  end="{{chooseTime.endTime}}" bindchange="bindStartDateChange">
+      <view class="picker">
+        {{chooseTime.startTime}}
+      </view>
+    </picker>
+  </view>
+  <view class='flex-j-between choose-time'>
+    <text>结束时间：</text>
+    <picker mode="date" value="{{chooseTime.endTime}}" start="{{chooseTime.startTime}}" bindchange="bindEndDateChange">
+      <view class="picker">
+        {{chooseTime.endTime}}
+      </view>
+    </picker>
+  </view>
+  <button class='time-btn'  type="primary" bindtap='submitChooseTime'>确定</button>
+  <button type="default" bindtap='closeChooseTime'>取消</button>
+</view>

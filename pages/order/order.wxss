@@ -56,6 +56,7 @@ page{
   left: 0;  
   right: 0;  
   top: 0;  
+  padding-top:24rpx;
 }  
 .result-item{  
   background: #fff;
@@ -64,7 +65,7 @@ page{
   width:654rpx;
   padding:0 24rpx;
   /* height:298rpx; */
-  margin:24rpx auto;
+  margin:0 auto 24rpx auto;
   flex-direction: column;  
   overflow: hidden;  
   border-bottom: 2rpx solid #e5e5e5;  
@@ -101,7 +102,7 @@ page{
   margin: 0 8rpx;  
 }  
 .loading{  
-  padding: 10rpx;  
+  padding-bottom: 10rpx;  
   font-size: 22rpx;
   color: #cccccc;
   text-align: center;  
@@ -195,11 +196,40 @@ page{
   line-height: 40rpx;
   color:#cccccc;
   position:relative;
-  top:10rpx;
+  top:-10rpx;
 }
 .recyle-type-icon{
   height: 26rpx;
   width:26rpx;
   vertical-align: top;
   margin-left: 10rpx;
+}
+/* 订单筛选  */
+.order-filter{
+  display: flex;
+  justify-content:space-between;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 24rpx 20rpx;
+	font-size: 30rpx;
+	line-height: 48rpx;
+	color: #333333;
+}
+.picker image{
+  width: 16rpx;
+	height: 8rpx;
+  margin-left: 20rpx;
+  vertical-align:middle;
+}
+.choose-time-box{
+  margin-top: 80rpx;
+}
+.choose-time{
+  padding: 0 40rpx;
+  font-size: 28rpx;
+  line-height: 88rpx;
+  color:#666;
+}
+.time-btn{
+  margin: 120rpx auto 30rpx auto;
 }

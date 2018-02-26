@@ -92,14 +92,7 @@ export default {
     let h = date.getHours();
     let m = date.getMinutes();
     let s = date.getSeconds();
-    return {
-      Y,
-      M: this.formatNum(M),
-      D: this.formatNum(D),
-      h: this.formatNum(h),
-      m: this.formatNum(m),
-      s: this.formatNum(s),
-    }
+    return `${this.formatNum(Y)}-${this.formatNum(M)}-${this.formatNum(D)}`
   },
   // 获取当前页面的query参数
   getCurPageOpt() {
@@ -110,25 +103,6 @@ export default {
   // 根据key排序
   sortByKey(arr, key) {
     arr.sort((x, y) => y[key] - x[key]);
-  },
-
-  // 获取符合使用规则的代金券
-  getAvailableCoupon(cps, price) {
-    price = parseInt(price);
-    let temp = [];
-    // 过滤达不到估价金额优惠券
-    for (let i = 0; i < cps.length; i++) {
-      cps[i]['useLimited'] = parseInt(cps[i]['useLimited']);
-      cps[i['faceValue']] = parseInt(cps[i['faceValue']]);
-      if (cps[i]['status'] == 10) {
-        if (price >= cps[i]['useLimited'] / 100) {
-          temp.push(cps[i]);
-        }
-      }
-    }
-    // 价格排序
-    this.sortByKey(temp, 'faceValue');
-    return temp[0];
   },
   // 是否为有效的手机号码
   isMobile(tel) {

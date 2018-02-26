@@ -17,3 +17,9 @@ button[disabled][type="default"], wx-button[disabled]:not([type]){
 .text-center{text-align: center}
 .ft24{font-size: 24rpx;line-height: 36rpx;}
 .color666{color:#666}
+.flex-j-between{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+}

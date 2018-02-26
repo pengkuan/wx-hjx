@@ -4,13 +4,13 @@ Page({
     showOrderTrack: false,
     animationData: {},
     orderTrackList:[
-      { name: '订单已提交', time:'1月1日 12:12'},
+      { name: '订单完成', time: '1月1日 12:12' },
+      { name: '订单已提交', time: '1月1日 12:12' },
       { name: '审批通过', time: '1月1日 12:12' },
       { name: '付款完成', time: '1月1日 12:12' },
       { name: '发货完成', time: '1月1日 12:12' },
       { name: '发货完成', time: '1月1日 12:12' },
-      { name: '验货完成', time: '1月1日 12:12' },
-      { name: '订单完成', time: '1月1日 12:12' }
+      { name: '验货完成', time: '1月1日 12:12' }
     ]
   },
   onLoad(params){

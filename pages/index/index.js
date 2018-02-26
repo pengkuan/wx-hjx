@@ -7,9 +7,9 @@ Page({
   data: {
     isBind:false,//检查是否绑定，未绑定则去登录绑定
     listData: [
-      { "code": "今天", "text1": "11", "text2": "21", "text3": "31", "text4": "41"},
-      { "code": "昨天", "text1": "11", "text2": "21", "text3": "31", "text4": "41" },
-      { "code": "本周", "text1": "11", "text2": "21", "text3": "31", "text4": "41555" }
+      { "code": "今天", "text1": "-", "text2": "-", "text3": "-", "text4": "-"},
+      { "code": "昨天", "text1": "-", "text2": "-", "text3": "-", "text4": "-" },
+      { "code": "本周", "text1": "-", "text2": "-", "text3": "-", "text4": "-" }
     ],
     imgUrls: [
       "../../image/home_banner1.png",

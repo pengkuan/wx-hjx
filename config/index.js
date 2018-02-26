@@ -4,7 +4,6 @@ export const WX_AUTH_TYPE = 2;
 export const WX_APP_ID = 'wxdd35de8f647a231f';
 
 export const host = 'https://dev-app.huanjixia.com/api/';
-export const mobileHost = 'https://mobile.huishoubao.com/';
 
 export const highPricePhone = 20000;//高价机判断 单位为分
 
