@@ -1,18 +1,18 @@
 <view class="container">
   <view class='content-box text-center color666'>
-    <view class='phoneName ft24'>iPhone X</view>
-    <view class='imei ft24'>IMEI：12345678912345</view>
-    <view class='price ft24'>回收报价：￥6666 (<text class='difference'>差异额：￥2222</text>) </view>
-    <view class='status' bindtap='chooseSezi'>已预付款<image src='../../image/odetail_more.png'></image> </view>
+    <view class='phoneName ft24'>{{dOrder.productName}}</view>
+    <view class='imei ft24'>IMEI：{{dOrder.imei}}</view>
+    <view class='price ft24'>回收报价：￥{{dOrder.evaPrice}} (<text class='difference'>差异额：￥{{dOrder.evaPrice - dOrder.payPrice}}</text>) </view>
+    <view class='status' bindtap='chooseSezi'>{{dOrder.statusName}}<image src='../../image/odetail_more.png'></image> </view>
     <view class='report ft24'> <image src='../../image/odetail_report.png'></image> 质检报告</view>
   </view>
   <view class='content-box'>
     <view class='title'>商户信息</view>
     <view class='detail'>
-      <view>S1姓名： 小白白</view>
-      <view>S1手机： 15117933646</view>
-      <view>O1名称： 华为售后海岸城店</view>
-      <view>O3名称： 华为售后</view>
+      <view>S1姓名： {{dOrder.s1Info.s1Name}}</view>
+      <view>S1手机： {{dOrder.s1Info.s1Phone}}</view>
+      <view>O1名称： {{dOrder.o1Info.o1Name}}</view>
+      <view>O3名称： {{dOrder.o1Info.o3Name}}</view>
     </view>
   </view>
   <!-- <view class='content-box'>
@@ -26,11 +26,11 @@
   <view class='content-box'>
     <view class='title'>订单信息</view>
     <view class='order-detail'>
-      <view class="order-no"> <text>订单号码：123456</text> <button bindtap='copyOrderNo'>复制</button> </view>
-      <view>发货时间：2018-01-18 22:22:22</view>
-      <view>回收类型：门店回收</view>
-      <view>发货单号：123456789</view>
-      <view>下单时间：2018-01-18 23:23:23</view>
+      <view class="order-no"> <text>订单号码：{{dOrder.orderNum}}</text> <button bindtap='copyOrderNo'>复制</button> </view>
+      <view>发货时间：{{dOrder.distributeTime}}</view>
+      <view>回收类型：{{dOrder.phoneRecycleTypeName}}</view>
+      <view>发货单号：{{dOrder.logisticId}}</view>
+      <view>下单时间：{{dOrder.orderTime}}</view>
     </view>
   </view>
 <!-- 底部滑出订单跟踪Modal  -->
@@ -41,9 +41,9 @@
       <view class="track-item" wx:for="{{orderTrackList}}" wx:key="{{index}}">
         <view class="{{index == 0?'current':''}}">
           <text class="{{index == 0?'currentSpot':'spot'}}"></text>
-          {{item.name}}
+          {{item.orderStatusName}}
         </view>
-        <view>{{item.time}}</view>
+        <view>{{item.createTime}}</view>
       </view>
     </scroll-view>
     <view class='hide-modal' bindtap='hideModal'>关闭</view>

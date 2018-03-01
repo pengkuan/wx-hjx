@@ -215,11 +215,14 @@ page{
 	line-height: 48rpx;
 	color: #333333;
 }
+.picker{
+  display: flex;
+  align-items: center
+}
 .picker image{
   width: 16rpx;
 	height: 8rpx;
   margin-left: 20rpx;
-  vertical-align:middle;
 }
 .choose-time-box{
   margin-top: 80rpx;

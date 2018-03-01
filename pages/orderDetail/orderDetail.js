@@ -1,22 +1,22 @@
+import api from '../../api/index'  
+let app = getApp()
 Page({
   data:{
     orderNo:'',
+    dOrder:{},
     showOrderTrack: false,
     animationData: {},
-    orderTrackList:[
-      { name: '订单完成', time: '1月1日 12:12' },
-      { name: '订单已提交', time: '1月1日 12:12' },
-      { name: '审批通过', time: '1月1日 12:12' },
-      { name: '付款完成', time: '1月1日 12:12' },
-      { name: '发货完成', time: '1月1日 12:12' },
-      { name: '发货完成', time: '1月1日 12:12' },
-      { name: '验货完成', time: '1月1日 12:12' }
-    ]
+    orderTrackList:[]
   },
   onLoad(params){
+    // app.globalData.orderDetailOrigin = true //跳回订单列表时使用 
+    app.globalData.orderListOrigin = 'orderDetail' //跳回订单列表时使用 
+
     this.setData({
       orderNo: params.orderId
-    })
+    })  
+    this.getDetail(params.orderId)
+    this.getOrderFlow(params.orderId)
   },
   copyOrderNo(){
     wx.setClipboardData({
@@ -80,6 +80,34 @@ Page({
         showOrderTrack: false
       })
     }, 200)
+  },
+  getDetail(id){
+    api.orderDetail({'orderId':id}).then(res => {
+      if (res.ret != '0') {
+        wx.showToast({
+          title: res.retinfo,
+          icon: 'none'
+        })
+        return
+      }
+      this.setData({
+        dOrder: res.data
+      })
+    })
+  },
+  getOrderFlow(id) {
+    api.orderFlow({ 'orderId': id }).then(res => {
+      if (res.ret != '0') {
+        wx.showToast({
+          title: res.retinfo,
+          icon: 'none'
+        })
+        return
+      }
+      this.setData({
+        orderTrackList: res.data
+      })
+    })
   }
   
 })

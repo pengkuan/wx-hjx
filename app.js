@@ -1,5 +1,13 @@
 //app.js
 App({
+  globalData: {
+    code: '',
+    orderSeach: '', //订单搜索明细使用
+    orderListOrigin:'other', //取值 orderDetail(订单详情)、orderSearch(订单搜索明细)、other(其他)
+    roderDetailOrigin:false,//判断跳转到订单列表的origin是否为订单详情页
+    orderSeachOrigin: false,//判断跳转到订单列表的origin是否为订单详情页
+    userInfo: {}
+  },
   onLaunch: function () {
     // 获取用户信息
     wx.getSetting({
@@ -21,9 +29,6 @@ App({
         }
       }
     })
-  },
-  globalData: {
-    code:'',
-    userInfo: {}
   }
+  
 })

@@ -92,7 +92,6 @@ Page({
       })
       api.loginGetCaptcha(data).then(res => {
         wx.hideLoading()
-        this.counting()
         if (res.ret != '0') {
           this.setData({
             'warnInfo': res.retinfo
@@ -102,6 +101,7 @@ Page({
         this.setData({
           'time': 60
         })
+        this.counting()
       })
     })
   },

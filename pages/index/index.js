@@ -22,7 +22,12 @@ Page({
     interval: 5000,
     duration: 1000
   },
+  onShow() {
+    app.globalData.orderListOrigin = 'other' //跳回订单列表时使用 
+  },
   onLoad: function () {
+    // app.globalData.orderSeachOrigin = false
+    
     user.getWxCode().then((code) => {
       this.setData({
         code: code
@@ -68,6 +73,7 @@ Page({
     wx.navigateTo({ 'url': '/pages/searchOrder/searchOrder' })
   },
   todayOrder(){
+    app.globalData.orderDetailOrigin = false //跳回订单列表时使用
     wx.switchTab({
       url: '/pages/order/order',
     })

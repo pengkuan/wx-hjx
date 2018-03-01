@@ -8,15 +8,14 @@
   </view>  
   <!-- 订单筛选  -->
   <view class='order-filter'>
-    <picker bindchange="bindPickerChange" range-key="name" value="{{filter.statusIndex}}" range="{{statusList}}">
+    <picker bindchange="pickerOrderStatus" range-key="name" value="{{filter.statusIndex}}" range="{{statusList}}">
       <view class="picker">
         {{statusList[filter.statusIndex].name}}
         <image src='../../image/ico_down.png'></image>
       </view>
     </picker>
     <view class="picker" bindtap='filterTime'>
-         {{filter.startTime?filter.startTime+'至'+filter.endTime : '下单时间'}} 
-        <!-- {{filter.startTime?444:55}} -->
+         {{initTime? '下单时间' : filter.startTime+'至'+filter.endTime}} 
         <image src='../../image/ico_down.png'></image>
     </view>
   </view>

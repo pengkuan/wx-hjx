@@ -7,7 +7,8 @@ Page({
     wxUserInfo:{},
     userInfo: {}
   },
-  onLoad: function () {
+  onShow: function () {
+    app.globalData.orderListOrigin = 'other'
     console.log(app.globalData.userInfo)
     this.setData({
       userInfo: app.globalData.userInfo

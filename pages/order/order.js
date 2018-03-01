@@ -6,12 +6,14 @@ var config = require('../../config/index.js')
 let currentTime = util.formatDate(new Date().getTime())
 Page({
   data: {
+    // ifDetailSearch:false, //是否为明细搜索
     filter:{
       statusId:'0',
-      statusIndex:0,
+      statusIndex:'0',
       startTime: currentTime,
       endTime: currentTime
     },
+    initTime:true, //为true时，展示'下单时间'，默认表示今日
     chooseTime:{
       startTime: currentTime,
       endTime: currentTime
@@ -39,7 +41,6 @@ Page({
     searchOrderList: [], //放置返回数据的数组  
     isFromSearch: true,   // 用于判断searchOrderList数组是不是空数组，默认true，空的数组  
     searchPageNum: '0',   // 设置加载的第几次，默认是第一次  
-    callbackcount: 15,      //返回数据的个数  
     refresh: false, //下拉刷新变量，默认false，隐藏
     searchLoading: false, //"上拉加载"的变量 
     searchLoadingComplete: false , //“没有数据”的变量，默认false，隐藏  
@@ -47,37 +48,54 @@ Page({
     highPricePhone: config.highPricePhone,
     loading:true
   },
-  onShow(){
-    //是否有搜索条件
-    if (false){
-
-    }else{
-      this.init()
+  onShow() {
+    let status = app.globalData.orderListOrigin
+    switch (status){
+      case 'other':
+        console.log('other')
+        this.initFilterData()
+        app.globalData.orderSeach = ''
+        this.init()
+        break
+      case 'orderDetail':
+        console.log('orderDetail')
+        this.setData({
+          'loading': false
+        })
+        break
+      case 'orderSearch':
+        if (app.globalData.orderSeach) { //如果有搜索条件
+          console.log('orderSearch')
+          this.setSearchDetailStatus(true)
+        }
+        this.init()
+        break
     }
   },
+  
   onHide(){
     //页面隐藏时 
     this.setData({
-      'loading': true
+      'loading': true,
+      'initTime': true
     })
-    //将搜索参数初始化
-
   },
-  //搜索，访问网络  
-  fetchSearchList: function () {
-    let searchPageNum = this.data.searchPageNum,//把第几次加载次数作为参数  
-        callbackcount = this.data.callbackcount; //返回数据的个数 
-
-    //设置筛选值 ing..     
+  fetchSearchList () {
+    let searchPageNum = this.data.searchPageNum//把第几次加载次数作为参数  
     let reqData = {
       "roleId": app.globalData.userInfo.userId, 
+      "orderStatus":'0',
       "channelUserId": app.globalData.userInfo.channelUserId, 
-      "orderStatus": this.data.filter.statusId,
-      "searchKey": "",
-      "startTime": this.data.filter.startTime+' 00:00:01',
-      "endTime": this.data.filter.endTime + ' 23:59:59',
       "pageIndex": searchPageNum+'',
       "pageSize": "10"
+    }
+    if (app.globalData.orderListOrigin == 'orderSearch' ){
+      reqData.search = app.globalData.orderSeach.searchKey
+      reqData.keyType = app.globalData.orderSeach.keyType
+    }else{
+      reqData.orderStatus = this.data.filter.statusId,
+      reqData.startTime = this.data.filter.startTime + ' 00:00:01'
+      reqData.endTime = this.data.filter.endTime + ' 23:59:59'
     }
     api.orderList(reqData).then(res=>{
       if (res.ret != '0') {
@@ -87,8 +105,6 @@ Page({
         })
         return
       }
-      //关闭下拉
-      wx.stopPullDownRefresh();
       let result = res.data
       this.setData({ 
         phoneimgCDNUrl: result.phoneimgCDNUrl,
@@ -105,37 +121,34 @@ Page({
             if (item.orderStatus == val.statusId) item.orderStatusName = val.showName
           })
         })
-        
         this.setData({
           searchOrderList: searchList, //获取数据数组  
           loading: false, //在设置searchOrderList数据后再显示
           searchLoading: true   
         });
-        console.log(22266)
         if (result.orderList.length < 10){ //加载数不足10条，代表已加载全部
           this.isOver()
           return
         }
         //没有数据了，把“没有数据”显示，把“上拉加载”隐藏  
       } else {
-        console.log(222)
         this.isOver()
       }
     })
   },
   //点击搜索按钮，触发事件  
-  init: function (e) {
-    this.initData()
+  init(e) {
+    this.initConfig()
     this.fetchSearchList();
   },
-  initData:function(){
+  initConfig(){ //设置初始配置
     this.setData({
-      loading: true,
-      searchPageNum: '0',   //第一次加载，设置1  
-      searchOrderList: [],  //放置返回数据的数组,设为空  
-      isFromSearch: true,  //第一次加载，设置true  
-      searchLoading: true,  //把"上拉加载"的变量设为true，显示  
-      searchLoadingComplete: false //把“没有数据”设为false，隐藏  
+      'loading': true,
+      'searchPageNum': '0',   //第一次加载，设置1  
+      'searchOrderList': [],  //放置返回数据的数组,设为空  
+      'isFromSearch': true,  //第一次加载，设置true  
+      'searchLoading': true,  //把"上拉加载"的变量设为true，显示  
+      'searchLoadingComplete': false //把“没有数据”设为false，隐藏  
     })
   },
   isOver(){
@@ -175,7 +188,8 @@ Page({
     wx.navigateTo({ 'url': '/pages/searchOrder/searchOrder'})
   },
   //订单筛选
-  bindPickerChange(e){
+  pickerOrderStatus(e){
+    this.setSearchDetailStatus(false)
     this.setData({
       'filter.statusIndex' : e.detail.value,
       'filter.statusId': this.data.statusList[e.detail.value].id
@@ -184,6 +198,12 @@ Page({
     this.init()
   },
   filterTime(){
+    if(this.data.initTime){
+      this.setData({
+        'chooseTime.startTime': currentTime , 
+        'chooseTime.endTime': currentTime
+      })
+    }
     this.setData({
       showFilterTime:true
     })
@@ -204,12 +224,36 @@ Page({
     })
   },
   submitChooseTime(){
+    this.setSearchDetailStatus(false)
     this.closeChooseTime()
     this.setData({
+      'initTime':false,
       'filter.startTime': this.data.chooseTime.startTime,
-      'filter.endTime': this.data.chooseTime.endTime
+      'filter.endTime': this.data.chooseTime.endTime,
     })
     this.init()
+  },
+  initFilterData(){
+    this.setData({
+      'initTime': true,
+      'filter.statusIndex': '0', //将 订单与下单时间设置为初始状态 
+      'filter.startTime': currentTime,
+      'filter.endTime': currentTime
+    })
+  },
+  setSearchDetailStatus(status){ //根据是否为搜索明细设置状态
+    if (status) { 
+      this.setData({
+        'initTime': true,
+        'filter.statusIndex': '0', //将 订单与下单时间设置为初始状态 
+        'filter.startTime': currentTime,
+        'filter.endTime': currentTime
+      })
+    }else{
+      app.globalData.orderSeach = '' //将对应全局参数清空
+      this.setData({
+      })
+    }
   }
 
 })  
