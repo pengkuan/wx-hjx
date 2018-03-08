@@ -10,7 +10,7 @@
     </view>
     
   </view>
-  <button class="button mue-button mue-button-primary" bindtap="unBind" >退出登录</button>
+  <button class="hjx-btn-primary mar-top70" bindtap="preUnBind" >退出登录</button>
   
         
 </view>

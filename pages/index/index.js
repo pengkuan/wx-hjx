@@ -12,9 +12,9 @@ Page({
       { "code": "本周", "text1": "-", "text2": "-", "text3": "-", "text4": "-" }
     ],
     imgUrls: [
-      "../../image/home_banner1.png",
-      "../../image/home_banner1.png",
-      "../../image/home_banner1.png"
+      "../../image/home_banner1.jpg",
+      "../../image/home_banner2.jpg",
+      "../../image/home_banner3.jpg"
     ],
     showIntroduce:false,
     indicatorDots: false,
@@ -27,9 +27,9 @@ Page({
   },
   onLoad: function () {
     // app.globalData.orderSeachOrigin = false
-    
+    let self = this
     user.getWxCode().then((code) => {
-      this.setData({
+      self.setData({
         code: code
       })
       //检查是否有绑定，没有则去绑定
@@ -53,7 +53,7 @@ Page({
             return
           }
           //否则 代表已绑定 展示页面并设置信息
-          this.setData({ isBind : true })
+          self.setData({ isBind : true })
           app.globalData.userInfo = {
             channelUserId: res.data.channel_user_id,
             tel: res.data.phone,

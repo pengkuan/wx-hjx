@@ -1,14 +1,12 @@
 {
   "pages":[
-    
     "pages/index/index",
     "pages/check/check",
     "pages/login/login",
     "pages/user/user",
     "pages/order/order",
     "pages/orderDetail/orderDetail",
-    "pages/searchOrder/searchOrder",
-    "pages/test/test"
+    "pages/searchOrder/searchOrder"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -31,7 +29,7 @@
         "iconPath" : "image/tabbar_order_n.png"
       },
       {
-        "text": "个人设置",
+        "text": "我的",
         "pagePath": "pages/user/user",
         "selectedIconPath": "image/tabbar_user.png",
         "iconPath": "image/tabbar_user_n.png"

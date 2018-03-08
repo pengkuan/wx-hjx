@@ -6,7 +6,7 @@
     <view class='phoneInfo'>
       <text class='tel'>{{tel}}</text>
       <text class='time' wx:if="{{time}}">{{time}}s</text>
-      <text class='time' bindtap='getPhoneCode' wx:else>重新获取</text>
+      <text class='time' bindtap='getPhoneCode' wx:else>获取验证码</text>
     </view>
     <view class="input-wrapper">
       <input class="mue-input input-tel" type="number" maxlength="6" bindinput="handlePhoneCode"

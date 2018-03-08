@@ -1,20 +1,19 @@
 <view class="search" wx:if="{{!showFilterTime}}">  
   <view class="search-bar">  
-    <view class="search-wrap">  
+    <view class="search-wrap" bindtap='goSearch'>  
         <icon type="search" size="16" class="icon-search" />  
-        <!-- <input type="text" placeholder="请输入订单号/手机型号/物流单号/门店名称" class="search-input" name="searchKeyword" bindinput="bindKeywordInput" value="{{searchKeyword}}" />   -->
-        <input type="text" placeholder="请输入订单号/手机型号/物流单号/门店名称" class="search-input" placeholder-style="color: #eee; font-size: 24rpx" bindtap='goSearch' />  
+        <text class="remind-text">请输入订单号/手机型号/物流单号/门店名称</text>
     </view>  
   </view>  
   <!-- 订单筛选  -->
   <view class='order-filter'>
     <picker bindchange="pickerOrderStatus" range-key="name" value="{{filter.statusIndex}}" range="{{statusList}}">
-      <view class="picker">
+      <view class="picker {{initTime?'mar-left70':'mar-left20'}}">
         {{statusList[filter.statusIndex].name}}
         <image src='../../image/ico_down.png'></image>
       </view>
     </picker>
-    <view class="picker" bindtap='filterTime'>
+    <view class="picker {{initTime?'mar-right70':'mar-right20'}}" bindtap='filterTime'>
          {{initTime? '下单时间' : filter.startTime+'至'+filter.endTime}} 
         <image src='../../image/ico_down.png'></image>
     </view>
@@ -85,6 +84,8 @@
       </view>
     </picker>
   </view>
-  <button class='time-btn'  type="primary" bindtap='submitChooseTime'>确定</button>
-  <button type="default" bindtap='closeChooseTime'>取消</button>
+  <view class='mar-top50'>
+    <button class='hjx-btn-primary'  bindtap='submitChooseTime'>确定</button>
+    <button class='hjx-btn-default'  bindtap='closeChooseTime'>取消</button>
+  </view>
 </view>

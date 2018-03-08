@@ -9,13 +9,8 @@
   margin-top: 24rpx;
   padding:25rpx;
 }
-.iphoneName{
-}
 .imei{
   color:#ccc;
-}
-.price{
-
 }
 .report image{
   width: 20rpx;
@@ -142,4 +137,7 @@
   position:relative;
   top:-1rpx;
   margin-right:10rpx;
+}
+page{
+  background:#f8f8f8
 }

@@ -1,12 +1,11 @@
-// 微信授权在回收宝中的授权类型ID
-export const WX_AUTH_TYPE = 2;
 // 微信小程序的APPID
 export const WX_APP_ID = 'wxdd35de8f647a231f'; 
 
-export const host = 'https://dev-app.huanjixia.com/api/';
+export const host = 'https://app.huanjixia.com/api/';
+// export const host = 'https://dev-app.huanjixia.com/api/'; 
 // export const host = 'http://www.agentapi.com:8888/api/';
 
-export const highPricePhone = 20000;//高价机判断 单位为分
+export const highPricePhone = 250000;//高价机判断 单位为分
 
 // Model
 const user = `${host}common/user/`;

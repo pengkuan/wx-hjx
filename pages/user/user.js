@@ -26,6 +26,20 @@ Page({
     })
     
   },
+  preUnBind(){
+    let self = this
+    wx.showModal({
+      title: '',
+      content: '确认退出您的账户？',
+      success: function (res) {
+        if (res.confirm) {
+          self.unBind()
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
   unBind(){
     user.getWxCode().then((code) => {
       const reqData = {

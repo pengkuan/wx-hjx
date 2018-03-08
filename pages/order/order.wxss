@@ -35,9 +35,8 @@ page{
 .search-wrap .icon-search{  
   margin-right: 10rpx;  
 }  
-.search-wrap .search-input{  
-  flex: auto;  
-  font-size: 28rpx;  
+.search-wrap .remind-text{  
+  color: #ddd; font-size: 24rpx 
 }  
 .search-cancel{  
   padding: 0 20rpx;  
@@ -236,3 +235,8 @@ page{
 .time-btn{
   margin: 120rpx auto 30rpx auto;
 }
+.mar-top50{margin-top: 50rpx;}
+.mar-left20{margin-left: 20rpx}
+.mar-left70{margin-left: 70rpx}
+.mar-right20{margin-right: 20rpx}
+.mar-right70{margin-right: 70rpx}

@@ -28,11 +28,12 @@ Page({
       })
       return
     } 
+    let self = this
     user.getWxCode().then((code) => {
       const data = {
-        'phone': this.data.tel,
+        'phone': self.data.tel,
         'jsCode': code,
-        'code': this.data.phoneCode
+        'code': self.data.phoneCode
       }
       wx.showLoading({
         'title': '正在登录',
@@ -41,10 +42,13 @@ Page({
       api.loginCaptcha(data).then( res =>{
         wx.hideLoading()
         if(res.ret != '0'){
-          wx.showModal({
-            title: '提示',
-            content: res.retinfo,
-            showCancel: false
+          // wx.showModal({
+          //   title: '提示',
+          //   content: res.retinfo,
+          //   showCancel: false
+          // })
+          self.setData({
+            'warnInfo': res.retinfo
           })
           return
         }
@@ -59,7 +63,7 @@ Page({
           data: res.data.login_token
         })
         wx.switchTab({
-          url: '/pages/order/order'
+          url: '/pages/index/index'
         })
       })
     })
@@ -81,9 +85,10 @@ Page({
     
   },
   getPhoneCode(){
+    let self = this
     user.getWxCode().then((code) => {
       const data = {
-        'phone': this.data.tel,
+        'phone': self.data.tel,
         'jsCode': code
       }
       wx.showLoading({
@@ -93,15 +98,15 @@ Page({
       api.loginGetCaptcha(data).then(res => {
         wx.hideLoading()
         if (res.ret != '0') {
-          this.setData({
+          self.setData({
             'warnInfo': res.retinfo
           })
           return
         }
-        this.setData({
+        self.setData({
           'time': 60
         })
-        this.counting()
+        self.counting()
       })
     })
   },

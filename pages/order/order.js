@@ -67,6 +67,8 @@ Page({
         if (app.globalData.orderSeach) { //如果有搜索条件
           console.log('orderSearch')
           this.setSearchDetailStatus(true)
+        }else{
+          this.initFilterData()
         }
         this.init()
         break
@@ -89,7 +91,7 @@ Page({
       "pageIndex": searchPageNum+'',
       "pageSize": "10"
     }
-    if (app.globalData.orderListOrigin == 'orderSearch' ){
+    if (app.globalData.orderListOrigin == 'orderSearch' && app.globalData.orderSeach ){
       reqData.search = app.globalData.orderSeach.searchKey
       reqData.keyType = app.globalData.orderSeach.keyType
     }else{
@@ -117,9 +119,18 @@ Page({
         this.data.isFromSearch ? searchList = result.orderList : searchList = this.data.searchOrderList.concat(result.orderList)
         searchList.forEach(item=>{
           let orderStatusName = '无'
-          this.data.statusInfoDp.forEach(val=>{
-            if (item.orderStatus == val.statusId) item.orderStatusName = val.showName
-          })
+          //
+          if (item.approveType == '1'){
+            this.data.statusInfoDp.forEach(val => {
+              if (item.orderStatus == val.statusId) item.orderStatusName = val.showName
+            })
+          }
+          if (item.approveType == '0') {
+            this.data.statusInfo.forEach(val => {
+              if (item.orderStatus == val.statusId) item.orderStatusName = val.showName
+            })
+          }
+          
         })
         this.setData({
           searchOrderList: searchList, //获取数据数组  

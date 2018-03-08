@@ -23,3 +23,25 @@ button[disabled][type="default"], wx-button[disabled]:not([type]){
   width: 100%;
   box-sizing: border-box;
 }
+.hjx-btn-primary{
+  display: block;
+  color:#fff;
+  margin-bottom:20rpx;
+  width: 702rpx;
+	height: 88rpx;
+	background-color: #fc4747;
+	border-radius: 8rpx;
+	font-size: 30rpx;
+	line-height: 88rpx;
+}
+.hjx-btn-default{
+  display: block;
+  margin-bottom:20rpx;
+  width: 702rpx;
+	height: 88rpx;
+	border-radius: 8rpx;
+	font-size: 30rpx;
+	line-height: 88rpx;
+  color:#000000;
+  background-color:#F8F8F8;
+}

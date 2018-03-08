@@ -16,15 +16,16 @@ Page({
   },
   onLoad: function () {},
   next(){
-    if (!Utils.isMobile(this.data.telValue)){
-      this.setData({
+    let self = this
+    if (!Utils.isMobile(self.data.telValue)){
+      self.setData({
         'warnInfo' : '手机号输入有误'
       })
       return
     } 
     user.getWxCode().then((code) => {
       const data = {
-        'phone': this.data.telValue,
+        'phone': self.data.telValue,
         'jsCode': code
       }
       wx.showLoading({
@@ -34,13 +35,13 @@ Page({
       api.loginGetCaptcha(data).then( res =>{
         wx.hideLoading()
         if(res.ret != '0'){
-          this.setData({
+          self.setData({
             'warnInfo': res.retinfo
           })
           return
         }
         //验证码登录
-        wx.navigateTo({ 'url': '/pages/login/login?tel=' + this.data.telValue})
+        wx.navigateTo({ 'url': '/pages/login/login?tel=' + self.data.telValue})
       })
     })
   },

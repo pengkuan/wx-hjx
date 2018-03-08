@@ -12,7 +12,7 @@ Page({
       { id: '3', name: '物流单号' },
       { id: '4', name: '门店名称' }
     ],
-    searchHistory: ['iPhone 8', '123456', '深圳市南山区', 'iPhone 8', '123456', '深圳市南山区']
+    searchHistory: []
   },
   onLoad() {
     // app.globalData.orderDetailOrigin = false //将跳转订单列表的
@@ -95,9 +95,11 @@ Page({
       }
       switch(operate){
         case '0':
-          this.setData({
-            searchHistory: res.data.history
-          })
+          if (res.data){
+            this.setData({
+              searchHistory: res.data.history
+            })
+          }
           break
         case '1':
           console.log(this.data.searchKey)

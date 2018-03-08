@@ -2,7 +2,7 @@
   <view class='search-box'>
     <view class='input-box'>
       <icon type="search" size="16" class="icon-search" />
-      <input value="{{searchkey}}" bindinput="handleKey" class='search-input' placeholder-style="color: #eee; font-size: 24rpx" placeholder='请先选择搜索类型'></input>
+      <input value="{{searchkey}}" bindinput="handleKey" class='search-input' placeholder-style="color: #ddd; font-size: 24rpx" placeholder='请先选择搜索类型'></input>
     </view>
     <view class='search-btn' bindtap='getSearch'>搜索</view>
   </view>
@@ -12,7 +12,7 @@
     </view>
   </view>
   <view class='bottom-space'>
-    <view class='recently'>
+    <view class='recently' wx:if="{{searchHistory.length>0}}">
       <text class='title'>最近搜索</text>
       <image src='../../image/search_delhistory.png' bindtap='delSearchHistory'></image>
     </view>
