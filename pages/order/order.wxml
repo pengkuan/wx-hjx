@@ -35,7 +35,7 @@
               </view>
               <view class="order-body overflow">
                 <view class='order-info fl'>
-                  <image class='order-phone inline-block' src='{{phoneimgCDNUrl+item.productPic}}'></image>
+                  <image mode="aspectFit" class='order-phone inline-block' src='{{phoneimgCDNUrl+item.productPic}}'></image>
                   <view class='detail inline-block'>
                     <view class='phone-name'>{{item.productModel}}</view>
                     <view class='other'>IMEI：{{item.appInputIMEI}}</view>

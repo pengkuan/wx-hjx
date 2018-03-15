@@ -10,8 +10,8 @@ Page({
     filter:{
       statusId:'0',
       statusIndex:'0',
-      startTime: currentTime,
-      endTime: currentTime
+      startTime: '',
+      endTime: ''
     },
     initTime:true, //为true时，展示'下单时间'，默认表示今日
     chooseTime:{
@@ -53,19 +53,34 @@ Page({
     switch (status){
       case 'other':
         console.log('other')
+        this.clearSearchData()
         this.initFilterData()
         app.globalData.orderSeach = ''
         this.init()
         break
+      case 'orderToday':
+        console.log('orderToday')
+        this.clearSearchData()
+        this.initConfig(),
+        this.setData({
+          'initTime': false,
+          'filter.statusId': '0',
+          'filter.statusIndex': '0', //将 订单与下单时间设置为初始状态 
+          'filter.startTime': currentTime,
+          'filter.endTime': currentTime
+        })
+        this.fetchSearchList()
+        break
       case 'orderDetail':
         console.log('orderDetail')
-        this.setData({
-          'loading': false
-        })
         break
       case 'orderSearch':
         if (app.globalData.orderSeach) { //如果有搜索条件
           console.log('orderSearch')
+          this.setData({
+            'filter.startTime':'',
+            'filter.endTime': ''
+          })
           this.setSearchDetailStatus(true)
         }else{
           this.initFilterData()
@@ -74,31 +89,39 @@ Page({
         break
     }
   },
-  
-  onHide(){
-    //页面隐藏时 
-    this.setData({
-      'loading': true,
-      'initTime': true
-    })
+  clearSearchData(){
+    if (app.globalData.orderSeach){
+      app.globalData.orderSeach.searchKey = ''
+      app.globalData.orderSeach.keyType = ''
+    }
   },
   fetchSearchList () {
+    console.log(app.globalData.orderSeach.searchKey , 888)
     let searchPageNum = this.data.searchPageNum//把第几次加载次数作为参数  
     let reqData = {
       "roleId": app.globalData.userInfo.userId, 
-      "orderStatus":'0',
+      "orderStatus": this.data.filter.statusId,
+      'startTime': this.data.filter.startTime ? this.data.filter.startTime + ' 00:00:00' : '',
+      'endTime': this.data.filter.endTime ? this.data.filter.endTime + ' 23:59:59' : '',
       "channelUserId": app.globalData.userInfo.channelUserId, 
       "pageIndex": searchPageNum+'',
-      "pageSize": "10"
+      "pageSize": "10",
+      "search": app.globalData.orderSeach?app.globalData.orderSeach.searchKey:'',
+      "keyType": app.globalData.orderSeach ?app.globalData.orderSeach.keyType:''
     }
-    if (app.globalData.orderListOrigin == 'orderSearch' && app.globalData.orderSeach ){
-      reqData.search = app.globalData.orderSeach.searchKey
-      reqData.keyType = app.globalData.orderSeach.keyType
-    }else{
-      reqData.orderStatus = this.data.filter.statusId,
-      reqData.startTime = this.data.filter.startTime + ' 00:00:01'
-      reqData.endTime = this.data.filter.endTime + ' 23:59:59'
-    }
+    // if (app.globalData.orderListOrigin == 'orderSearch' && app.globalData.orderSeach ){
+    //   reqData.search = app.globalData.orderSeach.searchKey
+    //   reqData.keyType = app.globalData.orderSeach.keyType
+    // } else if(app.globalData.orderListOrigin == 'orderToday'){
+    //   reqData.orderStatus = this.data.filter.statusId,
+    //   reqData.startTime = this.data.filter.startTime + ' 00:00:00'
+    //   reqData.endTime = this.data.filter.endTime + ' 23:59:59'
+    // }else{
+    //   reqData.orderStatus = this.data.filter.statusId,
+    //     reqData.startTime = this.data.filter.startTime?this.data.filter.startTime + ' 00:00:00':''
+    //   reqData.endTime = this.data.filter.endTime?this.data.filter.endTime + ' 23:59:59':''
+    // }
+ 
     api.orderList(reqData).then(res=>{
       if (res.ret != '0') {
         wx.showToast({
@@ -187,6 +210,7 @@ Page({
   },
   //滚动到底部触发事件  
   searchScrollLower: function () {
+
     if (this.data.searchLoading && !this.data.searchLoadingComplete) {
       this.setData({
         searchPageNum: Number(this.data.searchPageNum) + 1 +'',  //每次触发上拉事件，把searchPageNum+1  
@@ -247,19 +271,15 @@ Page({
   initFilterData(){
     this.setData({
       'initTime': true,
+      'filter.statusId': '0',  
       'filter.statusIndex': '0', //将 订单与下单时间设置为初始状态 
-      'filter.startTime': currentTime,
-      'filter.endTime': currentTime
+      'filter.startTime': '',
+      'filter.endTime': ''
     })
   },
   setSearchDetailStatus(status){ //根据是否为搜索明细设置状态
     if (status) { 
-      this.setData({
-        'initTime': true,
-        'filter.statusIndex': '0', //将 订单与下单时间设置为初始状态 
-        'filter.startTime': currentTime,
-        'filter.endTime': currentTime
-      })
+      this.initFilterData()
     }else{
       app.globalData.orderSeach = '' //将对应全局参数清空
       this.setData({

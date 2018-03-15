@@ -73,7 +73,8 @@ Page({
     wx.navigateTo({ 'url': '/pages/searchOrder/searchOrder' })
   },
   todayOrder(){
-    app.globalData.orderDetailOrigin = false //跳回订单列表时使用
+    // app.globalData.orderDetailOrigin = false //跳回订单列表时使用
+    app.globalData.orderListOrigin = 'orderToday' //跳回订单列表时使用 
     wx.switchTab({
       url: '/pages/order/order',
     })
@@ -85,9 +86,13 @@ Page({
     })
   },
   showIntroduce(bool){
-    this.setData({
-      showIntroduce : true
+    wx.showToast({
+      title: '数据采集功能开发中，敬请期待',
+      icon: 'none'
     })
+    // this.setData({
+    //   showIntroduce : true
+    // })
   },
   closeIntroduce(){
     this.setData({

@@ -158,8 +158,8 @@ page{
 }
 
 .order-phone{
-  width:150rpx;
-  height:148rpx;
+  width:150rpx;   
+  height:148rpx;   
   /* padding:0 46rpx 0 24rpx; */
   vertical-align:top;
 }

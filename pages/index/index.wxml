@@ -62,7 +62,7 @@
   <view class="wxapp-modal" wx:if="{{showIntroduce}}">
     <view class='body'>
       <view class="content">
-        <text>  活跃门店： 活跃的门店 \n 交易门店： 交易的门店 \n 检测总数： 检测的总数 \n 订单总数： 订单的总数 </text>
+         <text>  活跃门店：  \n 交易门店：  \n 检测总数：  \n 订单总数：  </text> 
       </view>
       <view class='yes' bindtap="closeIntroduce">知道了</view>
     </view>

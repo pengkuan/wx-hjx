@@ -9,7 +9,6 @@ Page({
     orderTrackList:[]
   },
   onLoad(params){
-    // app.globalData.orderDetailOrigin = true //跳回订单列表时使用 
     app.globalData.orderListOrigin = 'orderDetail' //跳回订单列表时使用 
 
     this.setData({
