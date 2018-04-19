@@ -40,6 +40,10 @@ Page({
       api.checkBindInfo({ jsCode: code }).then((res) => {
         wx.hideLoading()
         if (res.ret != '0') {
+          if (res.retcode == 'RECYCLEMANAGE-FACADE-10001'){
+            wx.redirectTo({ 'url': '/pages/check/check' })
+            return
+          }
           wx.showModal({
             title: '提示',
             content: res.retinfo,

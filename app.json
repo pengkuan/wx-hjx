@@ -1,6 +1,13 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/organization/channel/index",
+    "pages/organization/channel/detail",
+    "pages/organization/store/index",
+    "pages/organization/store/detail",
+    "pages/organization/employee/index",
+    "pages/organization/employee/detail",
+    
     "pages/check/check",
     "pages/login/login",
     "pages/user/user",

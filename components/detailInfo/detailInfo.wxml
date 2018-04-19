@@ -1,0 +1,7 @@
+<view class='overflow'>
+  <text class='fl'>{{title}} </text>  
+  <text class='fr' wx:if="{{strVal}}">{{strVal}} </text>
+  <view class='fr'  wx:else>
+    <view wx:for="{{arrVal}}" wx:key="{{index}}">{{item}} </view>
+  </view>  
+</view>

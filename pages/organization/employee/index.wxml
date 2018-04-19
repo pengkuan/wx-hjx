@@ -1,0 +1,27 @@
+<view class="search">  
+  <view class="search-bar">  
+    <view class="search-wrap" bindtap='goSearch'>  
+        <icon type="search" size="16" class="icon-search" />  
+        <text class="remind-text">请输入店员名称</text>
+    </view>  
+  </view>  
+  <view class='text-center belongto'>
+    <view class='belongto-item'>所属商户：{{channelName}}</view>
+    <view>所属门店：{{storeName}}</view>
+  </view>
+  <view class="search-result">  
+    <block wx:if="{{searchList.length > 0}}">
+      <navigator class="result-item overflow" wx:for="{{searchList}}" wx:key="{{index}}" url = "../employee/detail?id={{item.strUserId}}&storeId={{storeId}}">  
+        <text class="organization fl" > {{item.strUserName}}</text>  
+        <image class='right-icon fr' src='/image/odetail_more.png'></image>
+        <!-- <text class='organization-next fr'>></text>  -->
+      </navigator> 
+    </block>
+    <block wx:else>
+      <view class='nodata-container'>
+        <image src="/image/order_nodata.png"></image>
+        <view class='info'>暂无数据</view>
+      </view>
+    </block>
+  </view>  
+</view> 

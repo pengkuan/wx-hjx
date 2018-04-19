@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "商户信息",
+  "usingComponents": {
+    "detailInfo": "/components/detailInfo/detailInfo"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "S1信息",
+  "usingComponents": {
+    "detailInfo": "/components/detailInfo/detailInfo"
+  }
+}

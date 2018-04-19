@@ -1,0 +1,25 @@
+<view class="container">
+  <view class='content-box'>
+    <view class='title'>门店资料</view>
+    <view class='detail'>
+      <detailInfo title='商户名称' strVal='{{channelName}}'></detailInfo>
+      <detailInfo title='门店名称' strVal='{{detailInfo.storeInfo.strStoreName}}'></detailInfo>
+      <detailInfo title='门店地址' strVal='{{detailInfo.storeInfo.strProvinceName+detailInfo.storeInfo.strCityName+detailInfo.storeInfo.strAreaName+detailInfo.storeInfo.strAddress}}'></detailInfo>
+      <detailInfo title='合作状态' strVal='{{detailInfo.storeInfo.strStatusName}}'></detailInfo>
+    </view>
+  </view>
+  <view class='content-box'>
+    <view class='title'>BD信息</view>
+    <view class='detail'>
+      <detailInfo title='BD名称' strVal='{{bd1Info.strUserName}}'></detailInfo>
+      <detailInfo title='BD联系方式' strVal='{{bd1Info.strPhoneNum}}'></detailInfo>
+    </view>
+  </view>
+  <view class='content-box'>
+    <view class='title'>S2信息</view>
+    <view class='detail'>
+      <detailInfo title='S2名称' strVal='{{s2Info.strUserName}}'></detailInfo>
+      <detailInfo title='S2联系方式' strVal='{{s2Info.strPhoneNum}}'></detailInfo>
+    </view>
+  </view>
+ </view>

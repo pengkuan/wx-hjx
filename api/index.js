@@ -25,7 +25,15 @@ export default {
   orderList(params) { return fetch('recycle-manage', 'orderList', params) },
   orderDetail(params) { return fetch('recycle-manage', 'orderDetail', params) },
   orderFlow(params) { return fetch('recycle-manage', 'orderFlow', params) },
-  orderHistory(params) { return fetch('recycle-manage', 'orderHistory', params) }
+  orderHistory(params) { return fetch('recycle-manage', 'orderHistory', params) },
+  //组织架构相关
+  channelInfo(params) { return fetch('recycle-manage', 'channel_detail', params) }, //获取渠道详情
+  storeInfo(params) { return fetch('recycle-manage', 'getStoreInfo', params) }, //获取门店详情
+  employeeInfo(params) { return fetch('recycle-manage', 'get_jobnumber_info', params) }, //获取店员详情
+  bdChannelList(params) { return fetch('recycle-manage', 'getBdChannelList', params) }, //BD对应渠道列表
+  bdStoreList(params) { return fetch('recycle-manage', 'getBdStoreListByChannelId', params) }, //BD对应门店列表
+  bdEmployeeList(params) { return fetch('recycle-manage', 'get_related_people_list', params) } //BD对应店员列表 参数为S1
+
 }
 
 function reLogin(){

@@ -109,19 +109,6 @@ Page({
       "search": app.globalData.orderSeach?app.globalData.orderSeach.searchKey:'',
       "keyType": app.globalData.orderSeach ?app.globalData.orderSeach.keyType:''
     }
-    // if (app.globalData.orderListOrigin == 'orderSearch' && app.globalData.orderSeach ){
-    //   reqData.search = app.globalData.orderSeach.searchKey
-    //   reqData.keyType = app.globalData.orderSeach.keyType
-    // } else if(app.globalData.orderListOrigin == 'orderToday'){
-    //   reqData.orderStatus = this.data.filter.statusId,
-    //   reqData.startTime = this.data.filter.startTime + ' 00:00:00'
-    //   reqData.endTime = this.data.filter.endTime + ' 23:59:59'
-    // }else{
-    //   reqData.orderStatus = this.data.filter.statusId,
-    //     reqData.startTime = this.data.filter.startTime?this.data.filter.startTime + ' 00:00:00':''
-    //   reqData.endTime = this.data.filter.endTime?this.data.filter.endTime + ' 23:59:59':''
-    // }
- 
     api.orderList(reqData).then(res=>{
       if (res.ret != '0') {
         wx.showToast({

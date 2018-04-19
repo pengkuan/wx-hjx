@@ -23,13 +23,15 @@
       <image src='../../image/home_ico_jrdd.png'></image>
       <view>今日订单</view>
     </view>
-    <view class='bg-yellow bg-common' bindtap='showToast'>
-      <image src='../../image/home_ico_hzsgl.png'></image>
-      <view>合作商管理</view>
-    </view>
+    <navigator  url = "../organization/channel/index">
+      <view class='bg-yellow bg-common'>
+        <image src='../../image/home_ico_hzsgl.png'></image>
+        <view>门店管理</view>
+      </view>
+    </navigator>
     <view class='bg-red bg-common' bindtap='showToast'>
       <image src='../../image/home_ico_mdgl.png'></image>
-      <view>门店管理</view>
+      <view>我的任务</view>
     </view>
   </view>
   <!-- 订单数据  -->

@@ -1,0 +1,28 @@
+.container{
+  background: #f8f8f8;
+  padding-bottom:24rpx;
+}
+.content-box{
+  background: #fff;
+  width: 702rpx;
+  box-sizing: border-box;
+  margin-top: 24rpx;
+  padding:25rpx;
+}
+
+.title{
+  padding-bottom: 20rpx;
+  font-weight: 600;
+  border-bottom: 1px solid #f8f8f8;
+  font-size: 30rpx;
+  color:#333;
+  margin-bottom: 18rpx;
+}
+.detail{
+  color:#666;
+  font-size: 28rpx;
+  line-height: 56rpx;
+}
+page{
+  background:#f8f8f8
+}

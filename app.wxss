@@ -1,4 +1,7 @@
 /**app.wxss**/
+page{
+  font-family: PingFangSC-Medium;
+}
 .container {
   height: 100%;
   display: flex;
@@ -44,4 +47,10 @@ button[disabled][type="default"], wx-button[disabled]:not([type]){
 	line-height: 88rpx;
   color:#000000;
   background-color:#F8F8F8;
+}
+.belongto{
+  color:#999;
+  font-size: 26rpx;
+  padding: 10rpx 0 22rpx 0;
+  border-bottom:24rpx solid #f8f8f8;
 }

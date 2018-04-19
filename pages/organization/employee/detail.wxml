@@ -1,0 +1,19 @@
+<view class="container">
+  <view class='content-box'>
+    <view class='title'>个人资料</view>
+    <view class='detail'>
+      <detailInfo title='姓名' strVal='{{detailInfo.strUserName}}'></detailInfo>
+      <detailInfo title='身份证' strVal='{{detailInfo.strCardNum}}'></detailInfo>
+      <detailInfo title='手机号码' strVal='{{detailInfo.strUserTel}}'></detailInfo>
+    </view>
+  </view>
+  <view class='content-box'>
+    <view class='title'>组织架构</view>
+    <view class='detail'>
+      <detailInfo title='所在机构' strVal='{{detailInfo.channelName}}'></detailInfo>
+      <detailInfo title='所在门店' strVal='{{detailInfo.storeName}}'></detailInfo>
+      <detailInfo title='角色身份' strVal='{{detailInfo.strIdentityList}}'></detailInfo>
+      <detailInfo title='汇报对象' strVal='{{s2Info.strUserName}}'></detailInfo>
+    </view>
+  </view>
+ </view>

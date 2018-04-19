@@ -1,0 +1,9 @@
+@import "/common/organization.wxss";
+
+.belongto-item{line-height:42rpx}
+.right-icon{
+  width: 20rpx;
+  height:24rpx;
+  position:relative;
+  top:6rpx;
+}

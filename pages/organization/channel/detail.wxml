@@ -1,0 +1,12 @@
+<view class="container">
+  <view class='content-box'>
+    <view class='title'>商户资料</view>
+    <view class='detail'>
+      <detailInfo title='商户名称' strVal='{{detailInfo.strChannelName}}'></detailInfo>
+      <detailInfo title='营业执照地址' strVal='{{detailInfo.strAddrProvince+detailInfo.strAddrCity+detailInfo.strAddrArea+detailInfo.strAddress}}'></detailInfo>
+      <detailInfo title='销售区域' arrVal='{{saleAreaList}}'></detailInfo>
+      <detailInfo title='营业执照号' strVal='{{detailInfo.strLicenseNum}}'></detailInfo>
+      <detailInfo title='合作状态' strVal="{{detailInfo.strState == '1'?'合作中':'停止合作'}}"></detailInfo>
+    </view>
+  </view>
+ </view>
