@@ -8,6 +8,7 @@ Page({
   data: {
     channelName:'',
     searchList: [], //放置返回数据的数组  
+    noData:false
   },
   onLoad(params) {
     this.fetchSearchList(params.id) //根据商户ID获取门店
@@ -21,12 +22,23 @@ Page({
       'userId': app.globalData.userInfo.channelUserId,
       "channelId": id
     }
+    wx.showLoading({
+      'title': '加载中',
+      'mask': true
+    })
     api.bdStoreList(reqData).then(res => {
+      wx.hideLoading()
       if (res.ret != '0') {
         wx.showToast({
           title: res.retinfo,
           icon: 'none'
         })
+        return
+      }
+      if (res.list.length == 0) {
+        this.setData({
+          noData: true,
+        });
         return
       }
       this.setData({

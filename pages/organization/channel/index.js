@@ -7,20 +7,32 @@ let currentTime = util.formatDate(new Date().getTime())
 Page({
   data: {
     searchList: [], //放置返回数据的数组  
+    noData:false
   },
-  onShow() {
+  onLoad() {
     this.fetchSearchList()
   },
   fetchSearchList() {
     let reqData = {
       'userId': app.globalData.userInfo.channelUserId
     }
+    wx.showLoading({
+      'title': '加载中',
+      'mask': true
+    })
     api.bdChannelList(reqData).then(res => {
+      wx.hideLoading()
       if (res.ret != '0') {
         wx.showToast({
           title: res.retinfo,
           icon: 'none'
         })
+        return
+      }
+      if(res.list.length == 0){
+        this.setData({
+          noData: true,  
+        });
         return
       }
       this.setData({

@@ -10,18 +10,14 @@
     <view>所属门店：{{storeName}}</view>
   </view>
   <view class="search-result">  
-    <block wx:if="{{searchList.length > 0}}">
-      <navigator class="result-item overflow" wx:for="{{searchList}}" wx:key="{{index}}" url = "../employee/detail?id={{item.strUserId}}&storeId={{storeId}}">  
-        <text class="organization fl" > {{item.strUserName}}</text>  
-        <image class='right-icon fr' src='/image/odetail_more.png'></image>
-        <!-- <text class='organization-next fr'>></text>  -->
-      </navigator> 
-    </block>
-    <block wx:else>
-      <view class='nodata-container'>
-        <image src="/image/order_nodata.png"></image>
-        <view class='info'>暂无数据</view>
-      </view>
-    </block>
+    <navigator class="result-item overflow" wx:for="{{searchList}}" wx:key="{{index}}" url = "../employee/detail?id={{item.strUserId}}&storeId={{storeId}}">  
+      <text class="organization fl" > {{item.strUserName}}</text>  
+      <image class='right-icon fr' src='/image/odetail_more.png'></image>
+      <!-- <text class='organization-next fr'>></text>  -->
+    </navigator> 
+    <view class='nodata-container' wx:if="{{noData}}">
+      <image src="/image/order_nodata.png"></image>
+      <view class='info'>暂无数据</view>
+    </view>
   </view>  
 </view> 

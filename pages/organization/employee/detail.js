@@ -10,7 +10,12 @@ Page({
   },
   
   getDetail(id) {
+    wx.showLoading({
+      'title': '加载中',
+      'mask': true
+    })
     api.employeeInfo({ 'strUserId': id }).then(res => {
+      wx.hideLoading()
       if (res.ret != '0') {
         wx.showToast({
           title: res.retinfo,

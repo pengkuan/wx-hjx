@@ -7,21 +7,17 @@
   </view>  
   <view class='text-center belongto'>全部商户</view>
   <view class="search-result">  
-    <block wx:if="{{searchList.length > 0}}">
-      <view class="result-item overflow" wx:for="{{searchList}}" wx:key="{{index}}">  
-        <navigator class="organization fl"  url = "../channel/detail?id={{item.channelId}}">
-          <text > {{item.channelName}}</text>  
-        </navigator>
-        <navigator class='organization-next fr'  url = "../store/index?id={{item.channelId}}&channelName={{item.channelName}}">
-          <text>管辖门店</text> 
-        </navigator>
-      </view>  
-    </block>
-    <block wx:else>
-      <view class='nodata-container'>
-        <image src="/image/order_nodata.png"></image>
-        <view class='info'>暂无数据</view>
-      </view>
-    </block>
+    <view class="result-item overflow" wx:for="{{searchList}}" wx:key="{{index}}">  
+      <navigator class="organization fl"  url = "../channel/detail?id={{item.channelId}}">
+        <text > {{item.channelName}}</text>  
+      </navigator>
+      <navigator class='organization-next fr'  url = "../store/index?id={{item.channelId}}&channelName={{item.channelName}}">
+        <text>管辖门店</text> 
+      </navigator>
+    </view>  
+    <view class='nodata-container' wx:if="{{noData}}">
+      <image src="/image/order_nodata.png"></image>
+      <view class='info'>暂无数据</view>
+    </view>
   </view>  
 </view> 

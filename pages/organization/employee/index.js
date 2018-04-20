@@ -8,7 +8,8 @@ Page({
     searchList: [], //放置返回数据的数组 
     storeId: '',
     channelName:'',
-    storeName:''
+    storeName:'',
+    noData:false
   },
   onLoad(params) {
     this.fetchSearchList(params.id) //根据门店ID获取店员
@@ -26,12 +27,23 @@ Page({
       'storeId': id,
       "strPeopleType": "S1"
     }
+    wx.showLoading({
+      'title': '加载中',
+      'mask': true
+    })
     api.bdEmployeeList(reqData).then(res => {
+      wx.hideLoading()
       if (res.ret != '0') {
         wx.showToast({
           title: res.retinfo,
           icon: 'none'
         })
+        return
+      }
+      if (res.data.length == 0) {
+        this.setData({
+          noData: true,
+        });
         return
       }
       this.setData({
